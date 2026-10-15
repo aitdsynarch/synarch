@@ -91,7 +91,7 @@ export default function FooterBottom() {
           {/* Back to top */}
           <a
             href="#top"
-            className="group relative z-10 flex w-fit items-center gap-5 text-[10px] font-medium tracking-wide text-white/60 transition-colors hover:text-white sm:justify-self-end"
+            className="group relative z-10 mx-auto flex w-fit items-center gap-5 text-[10px] font-medium tracking-wide text-white/60 transition-colors hover:text-white sm:mx-0 sm:justify-self-end"
           >
             <span>Back to top</span>
 
