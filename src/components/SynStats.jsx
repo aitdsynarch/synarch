@@ -81,7 +81,9 @@ export default function Stats() {
         {/* Header */}
        
         {/* Stats grid */}
-        <div className="grid grid-cols-1 border-l border-t border-white/15 sm:grid-cols-2 lg:grid-cols-4">
+       
+<div className="grid grid-cols-2 border-l border-t border-white/15 lg:grid-cols-4">
+
           {stats.map((stat, index) => {
             const Icon = stat.icon;
 
