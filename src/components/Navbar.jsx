@@ -12,6 +12,7 @@ const links = [
 
 
 
+
 function PixelMark() {
   const pixels = [
     [0, 0, "orange"],
@@ -26,7 +27,7 @@ function PixelMark() {
 
   return (
     <span
-      className="relative block h-[45px] w-[45px] shrink-0"
+      className="relative block h-[32px] w-[32px] shrink-0"
       aria-hidden="true"
     >
       {pixels.map(([x, y, color], index) => (
@@ -34,18 +35,19 @@ function PixelMark() {
           key={index}
           className={`absolute ${
             color === "dark"
-              ? "h-[16px] w-[16px] bg-[#303030]"
-              : "h-[12px] w-[12px] bg-[#F0440A]"
+              ? "h-[11px] w-[11px] bg-[#303030]"
+              : "h-[8px] w-[8px] bg-[#F0440A]"
           }`}
           style={{
-            left: `${x * 15}px`,
-            top: `${y * 15}px`,
+            left: `${x * 10}px`,
+            top: `${y * 10}px`,
           }}
         />
       ))}
     </span>
   );
 }
+
 
 
 
