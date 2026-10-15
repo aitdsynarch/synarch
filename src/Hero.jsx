@@ -58,11 +58,13 @@ export default function Hero() {
             </a>
 
             <a
-              href="#events"
-              className="border-b border-black/50 pb-1 text-sm font-semibold transition-colors hover:border-[#F0440A] hover:text-[#F0440A]"
-            >
-              Discover what we do
-            </a>
+  href="https://synarch-courses.onrender.com/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="border-b border-black/50 pb-1 text-sm font-semibold transition-colors hover:border-[#F0440A] hover:text-[#F0440A]"
+>
+  Discover what we do
+</a>
           </div>
 
          

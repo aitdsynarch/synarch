@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 
 const SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbzbxy965vt-LyAwig3YatK7qm2PbDXuP3Pce7fTlazKc77kr5Jf4eHcaG86CWMd4shdEQ/exec";
+  "https://script.google.com/macros/s/AKfycbxfEFPObX56cqgiylK_lRhvL-HW51H2PVhNxU3l6pHrRAN-9oVz5u4kD-BEZqXHIYw2pg/exec";
 
 const teams = [
   "Tech Team",
@@ -44,35 +44,50 @@ export default function JoinForm() {
       ...prev,
       [name]: value,
     }));
+
+    setError("");
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setError("");
 
     if (status === "submitting") return;
 
     setStatus("submitting");
+    setError("");
 
     try {
-      await fetch(SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8",
-        },
-        body: JSON.stringify(form),
-      });
+      const hiddenForm = document.createElement("form");
 
-      // no-cors does not let the browser read Google's response.
-      // Therefore this confirms dispatch, not Google Forms acceptance.
-      setStatus("sent");
+      hiddenForm.method = "POST";
+      hiddenForm.action = SCRIPT_URL;
+      hiddenForm.target = "synarch-submit-frame";
+      hiddenForm.acceptCharset = "UTF-8";
+      hiddenForm.style.display = "none";
+
+      const payload = document.createElement("input");
+
+      payload.type = "hidden";
+      payload.name = "payload";
+      payload.value = JSON.stringify(form);
+
+      hiddenForm.appendChild(payload);
+      document.body.appendChild(hiddenForm);
+      hiddenForm.submit();
+      hiddenForm.remove();
+
+      // The iframe cannot reliably confirm Apps Script success.
+      // Keep the UI honest instead of showing a false success.
+      setStatus("idle");
+      setError(
+        "Request sent. Please verify the submission in Google Forms Responses before submitting again."
+      );
     } catch (err) {
-      console.error("SYNARCH form submission error:", err);
+      console.error("SYNARCH submission error:", err);
 
       setStatus("idle");
       setError(
-        "Request could not be sent. Check your internet connection and try again."
+        "Unable to send your application. Please try again."
       );
     }
   };
@@ -85,6 +100,14 @@ export default function JoinForm() {
 
   return (
     <section className="min-h-screen bg-[#f0eee3] px-6 py-16 text-[#242424] sm:px-12">
+      <iframe
+        name="synarch-submit-frame"
+        title="SYNARCH application submission"
+        className="hidden"
+        tabIndex={-1}
+        aria-hidden="true"
+      />
+
       <div className="mx-auto max-w-5xl">
         <p className="mb-5 text-xs font-bold uppercase tracking-[0.25em] text-[#77746b]">
           <span className="mr-3 inline-block h-2 w-2 bg-[#f04413]" />
@@ -92,12 +115,13 @@ export default function JoinForm() {
         </p>
 
         <h1 className="text-5xl font-bold tracking-[-0.06em] sm:text-7xl">
-          Join the <span className="text-[#f04413]">community.</span>
+          Join the{" "}
+          <span className="text-[#f04413]">community.</span>
         </h1>
 
         <p className="mt-5 max-w-lg text-sm leading-7 text-[#77746b]">
-          Join a community of curious minds, builders, and problem solvers
-          shaping a better tomorrow through technology.
+          Join a community of curious minds, builders, and problem
+          solvers shaping a better tomorrow through technology.
         </p>
 
         <div className="my-10 border-y border-[#d1cec3] py-4">
@@ -118,13 +142,12 @@ export default function JoinForm() {
             />
 
             <h2 className="text-3xl font-bold tracking-tight">
-              Application request sent.
+              Application submitted.
             </h2>
 
             <p className="mt-4 text-sm leading-7 text-[#77746b]">
-              Your request was sent to the Apps Script endpoint. Google Forms
-              acceptance cannot be confirmed by this page. Please check the
-              Responses tab before treating your application as submitted.
+              Check the Google Forms Responses tab to confirm
+              that your application has been saved.
             </p>
 
             <button
