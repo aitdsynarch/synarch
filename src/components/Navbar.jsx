@@ -9,31 +9,52 @@ const links = [
   { label: "Projects", href: "#projects" },
 ];
 
+
+
+
 function PixelMark() {
   const pixels = [
-    [0, 0], [1, 0], [2, 0],
-    [0, 1], [2, 1],
-    [0, 2], [1, 2], [2, 2],
+    [0, 0, "orange"],
+    [1, 0, "orange"],
+    [2, 0, "orange"],
+    [0, 1, "orange"],
+    [2, 1, "orange"],
+    [0, 2, "orange"],
+    [1, 2, "orange"],
+    [2, 2, "dark"],
   ];
 
   return (
     <span
-      className="relative block h-[22px] w-[22px] shrink-0"
+      className="relative block h-[45px] w-[45px] shrink-0"
       aria-hidden="true"
     >
-      {pixels.map(([x, y], index) => (
+      {pixels.map(([x, y, color], index) => (
         <span
           key={index}
-          className="absolute h-[5px] w-[5px] bg-[#F0440A]"
+          className={`absolute ${
+            color === "dark"
+              ? "h-[16px] w-[16px] bg-[#303030]"
+              : "h-[12px] w-[12px] bg-[#F0440A]"
+          }`}
           style={{
-            left: `${x * 7}px`,
-            top: `${y * 7}px`,
+            left: `${x * 15}px`,
+            top: `${y * 15}px`,
           }}
         />
       ))}
     </span>
   );
 }
+
+
+
+
+
+
+
+
+
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
