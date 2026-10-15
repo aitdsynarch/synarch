@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import {
   Code2,
@@ -7,6 +8,7 @@ import {
   Megaphone,
   ArrowUpRight,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const areas = [
   {
@@ -60,7 +62,7 @@ export default function WhatWeDo() {
   return (
     <section
       id="what-we-do"
-      className="relative overflow-hidden bg-[#F0EEE3] px-5 py-24 text-[#191919] sm:px-10 lg:px-16 lg:py-32"
+      className="bg-[#F0EEE3] px-5 py-20 text-[#191919] sm:px-10 lg:px-16 lg:py-28"
     >
       <div className="mx-auto max-w-7xl">
         {/* Section heading */}
@@ -69,110 +71,132 @@ export default function WhatWeDo() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
-          className="mb-14 flex flex-col justify-between gap-8 md:mb-20 md:flex-row md:items-end"
+          className="mb-12"
         >
-          <div>
-            <div className="mb-5 flex items-center gap-3">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#F0440A]" />
-              <span className="text-xs font-bold uppercase tracking-[0.25em]">
-                What We Do
-              </span>
-            </div>
-
-            <h2 className="max-w-3xl text-5xl font-semibold leading-[0.98] tracking-[-0.06em] sm:text-6xl lg:text-8xl">
-              Ideas into
-              <br />
-              <span className="text-[#F0440A]">impact.</span>
-            </h2>
+          <div className="mb-5 flex items-center gap-3">
+            <span className="h-2.5 w-2.5 rounded-full bg-[#F0440A]" />
+            <span className="text-xs font-bold uppercase tracking-[0.25em]">
+              What We Do
+            </span>
           </div>
 
-          <p className="max-w-sm text-base leading-7 text-black/65 md:text-lg">
-            We bring technology, creativity, and community together to help
-            students build real skills and meaningful things.
+          <h2 className="text-5xl font-semibold leading-[0.98] tracking-[-0.06em] sm:text-6xl lg:text-8xl">
+            Ideas into <span className="text-[#F0440A]">impact.</span>
+          </h2>
+
+          <p className="mt-5 max-w-xl text-sm leading-7 text-black/60 sm:text-base">
+            We bring technology, creativity, and community together to
+            help students build real skills and meaningful things.
           </p>
         </motion.div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-6">
-          {areas.map((area, index) => {
-            const Icon = area.icon;
+        {/* Left sticky image + right scrolling cards */}
+        <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
+          {/* Left image */}
+          <div className="lg:sticky lg:top-24">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.97 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="group relative h-[380px] overflow-hidden bg-[#191919] sm:h-[500px] lg:h-[620px]"
+            >
+              <img
+                src="/images/what.png"
+                alt="Students collaborating on technology and projects"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
 
-            return (
-              <motion.article
-                key={area.number}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                className={`group relative flex min-h-[340px] flex-col overflow-hidden border border-black/10 bg-[#F7F5EC] p-7 transition-colors duration-300 hover:bg-[#191919] hover:text-[#F0EEE3] sm:p-8 ${
-                  index < 2
-                    ? "lg:col-span-3"
-                    : "lg:col-span-2"
-                }`}
-              >
-                <div className="mb-12 flex items-start justify-between">
-                  <span className="font-mono text-sm text-black/45 transition-colors group-hover:text-white/45">
-                    / {area.number}
-                  </span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-black/10" />
 
-                  <div className="flex h-12 w-12 items-center justify-center border border-black/15 transition-all duration-300 group-hover:border-[#F0440A] group-hover:bg-[#F0440A]">
-                    <Icon
+           
+
+              
+            </motion.div>
+          </div>
+
+          {/* Right scrolling cards */}
+          <div className="space-y-5">
+            {areas.map((area, index) => {
+              const Icon = area.icon;
+
+              return (
+                <motion.article
+                  key={area.number}
+                  initial={{ opacity: 0, y: 45 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{
+                    duration: 0.55,
+                    delay: 0.05,
+                    ease: "easeOut",
+                  }}
+                  className="group relative flex min-h-[310px] flex-col border border-black/10 bg-[#F7F5EC] p-6 transition-colors duration-300 hover:bg-[#191919] hover:text-[#F0EEE3] sm:min-h-[330px] sm:p-8"
+                >
+                  <div className="mb-9 flex items-start justify-between">
+                    <span className="font-mono text-sm text-black/40 transition-colors group-hover:text-white/40">
+                      / {area.number}
+                    </span>
+
+                    <div className="flex h-12 w-12 items-center justify-center border border-black/15 transition-colors group-hover:border-[#F0440A] group-hover:bg-[#F0440A]">
+                      <Icon
+                        size={22}
+                        strokeWidth={1.5}
+                        className="transition-colors group-hover:text-white"
+                      />
+                    </div>
+                  </div>
+
+                  <p className="mb-2 text-xs font-bold uppercase tracking-[0.15em] text-[#F0440A]">
+                    {area.subtitle}
+                  </p>
+
+                  <div className="mb-4 flex items-center justify-between gap-3">
+                    <h3 className="text-3xl font-semibold tracking-[-0.05em] sm:text-4xl">
+                      {area.title}
+                    </h3>
+
+                    <ArrowUpRight
                       size={22}
-                      strokeWidth={1.5}
-                      className="transition-colors group-hover:text-white"
+                      className="shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
                     />
                   </div>
-                </div>
 
-                <p className="mb-2 text-xs font-bold uppercase tracking-[0.15em] text-[#F0440A]">
-                  {area.subtitle}
-                </p>
+                  <p className="max-w-lg text-sm leading-6 text-black/60 transition-colors group-hover:text-white/65">
+                    {area.description}
+                  </p>
 
-                <div className="mb-4 flex items-center justify-between gap-3">
-                  <h3 className="text-3xl font-semibold tracking-[-0.05em] sm:text-4xl">
-                    {area.title}
-                  </h3>
-
-                  <ArrowUpRight
-                    size={22}
-                    className="shrink-0 -translate-x-1 translate-y-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100"
-                  />
-                </div>
-
-                <p className="max-w-md text-sm leading-6 text-black/60 transition-colors group-hover:text-white/65">
-                  {area.description}
-                </p>
-
-                <div className="mt-auto flex flex-wrap gap-2 pt-8">
-                  {area.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="border border-black/10 px-3 py-1.5 text-[10px] font-medium uppercase tracking-wider text-black/65 transition-colors group-hover:border-white/20 group-hover:text-white/70"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.article>
-            );
-          })}
+                  <div className="mt-auto flex flex-wrap gap-2 pt-7">
+                    {area.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="border border-black/10 px-3 py-1.5 text-[10px] font-medium uppercase tracking-wider text-black/60 transition-colors group-hover:border-white/20 group-hover:text-white/70"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </motion.article>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Bottom statement */}
-        <div className="mt-10 flex flex-col justify-between gap-5 border-t border-black/15 pt-6 sm:flex-row sm:items-center">
+        {/* Bottom CTA */}
+        <div className="mt-12 flex flex-col justify-between gap-5 border-t border-black/15 pt-6 sm:flex-row sm:items-center">
           <p className="text-sm text-black/55">
             More than a club. A space to build what comes next.
           </p>
 
-          <a
-            href="#join"
+          <Link
+            to="/join"
             className="group inline-flex w-fit items-center gap-3 text-sm font-bold uppercase tracking-wider"
           >
             Be part of SYNARCH
-            <span className="flex h-9 w-9 items-center justify-center bg-[#F0440A] text-white transition-transform group-hover:translate-x-1">
+            <span className="flex h-10 w-10 items-center justify-center bg-[#F0440A] text-white transition-transform group-hover:translate-x-1">
               <ArrowUpRight size={18} />
             </span>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

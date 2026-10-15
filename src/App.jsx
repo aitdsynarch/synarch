@@ -1,24 +1,19 @@
-import { useState } from 'react'
-import './App.css'
-import Hero from './Hero'
-import WhatWeDo from './components/WhatWeDo'
-import Synarch from './components/Synarch'
-import { Stats } from '@react-three/drei'
-import SynStats from './components/SynStats'
-import Footer from './components/Footer'
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./Pages/Home";
+import JoinForm from "./Pages/JoinForm";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-    <Hero/>
-    <SynStats/>
-    <WhatWeDo/>
-    <Synarch/>
-    <Footer/>
-    </>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/join" element={<JoinForm />} />
+       
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

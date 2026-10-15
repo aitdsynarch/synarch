@@ -1,149 +1,215 @@
 
 import { motion } from "framer-motion";
+import FooterCTA from "./FooterCTA";
+import FooterBottom from "./FooterBottom";
+import FooterWordmark from "./FooterWordmark";
 
 const navigation = [
   { label: "About", href: "#about" },
   { label: "What We Do", href: "#what-we-do" },
   { label: "Events", href: "#events" },
   { label: "Projects", href: "#projects" },
+  { label: "Join Us", href: "#join" },
 ];
 
 const socials = [
-  { label: "Instagram", href: "https://instagram.com/" },
-  { label: "LinkedIn", href: "https://linkedin.com/" },
-  { label: "GitHub", href: "https://github.com/" },
-  { label: "Email", href: "mailto:hello@synarch.in" },
+  { label: "WhatsApp", href: "https://whatsapp.com/channel/0029VbDumka3LdQdSeGxXK0D" },
+  { label: "Instagram", href: "https://www.instagram.com/aitd.synarch/" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/aitdsynarch" },
+  { label: "GitHub", href: "https://github.com/aitdsynarch/" },
+  { label: "Discord", href: "https://discord.com/users/aitd.synarch" },
+  { label: "Reddit", href: "https://www.reddit.com/user/aitdsynarch/" },
+  { label: "X", href: "https://x.com/aitdsynarch" },
+  { label: "YouTube", href: "https://youtube.com/" },
+
 ];
+
+const reveal = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: "easeOut" },
+  },
+};
 
 export default function Footer() {
   return (
     <footer
       id="footer"
-      className="overflow-hidden bg-[#F0EEE3] text-[#191919]"
+      className="relative overflow-hidden bg-[#F0EEE3] text-[#191919]"
     >
-      <div className="mx-auto max-w-[1600px] px-5 pt-16 sm:px-10 lg:px-16">
+      {/* Top CTA */}
+      <FooterCTA />
 
-        {/* Main heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col justify-between gap-8 border-b border-black/20 pb-12 md:flex-row md:items-end"
-        >
-          <h2 className="text-5xl font-semibold leading-[0.95] tracking-[-0.07em] sm:text-7xl lg:text-8xl">
-            Think bigger.
-            <br />
-            <span className="text-[#F0440A]">Build together.</span>
-          </h2>
+      {/* Main Footer */}
+      <div className="mx-auto max-w-[1600px] px-5 sm:px-10 lg:px-16">
 
-          <a
-            href="#join"
-            className="w-fit border border-black/20 px-5 py-4 text-xs font-bold uppercase tracking-wider transition-colors hover:border-[#F0440A] hover:bg-[#F0440A] hover:text-white"
+        {/* Section Label */}
+        <div className="flex items-center justify-between gap-4 border-y border-black/15 py-4">
+          <span className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-black/50">
+            <span className="h-2 w-2 bg-[#F0440A]" />
+            The SYNARCH Community
+          </span>
+
+          
+        </div>
+
+        {/* Content Grid */}
+        <div className="grid gap-12 py-14 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8 lg:py-20">
+
+          {/* Brand Block */}
+          <motion.div
+            variants={reveal}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="lg:col-span-4"
           >
-            Join SYNARCH ↗
-          </a>
-        </motion.div>
-
-        {/* Footer content */}
-        <div className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
-
-          {/* Brand */}
-          <div className="lg:col-span-5">
             <a
               href="#top"
-              className="text-4xl font-black tracking-[-0.08em]"
+              aria-label="SYNARCH home"
+              className="group inline-flex items-center gap-3"
             >
-              SYNARCH<span className="text-[#F0440A]">.</span>
+              {/* Geometric Pixel Mark */}
+              <span className="grid grid-cols-3 gap-[3px]">
+                {Array.from({ length: 9 }, (_, i) => (
+                  <span
+                    key={i}
+                    className={`h-[7px] w-[7px] transition-colors duration-300 ${
+                      [0, 1, 2, 3, 5, 6, 7, 8].includes(i)
+                        ? "bg-[#F0440A] group-hover:bg-[#191919]"
+                        : "bg-transparent"
+                    }`}
+                  />
+                ))}
+              </span>
+
+              <span className="text-3xl font-black tracking-[-0.08em] sm:text-4xl">
+                synarch<span className="text-[#F0440A]">.</span>
+              </span>
             </a>
 
-            <p className="mt-5 max-w-sm text-sm leading-7 text-black/60">
-              A student-driven technology community for ideas, innovation,
-              collaboration, and building meaningful things together.
+            <p className="mt-6 max-w-sm text-sm leading-7 text-black/60">
+              A student-driven technology community where curiosity
+              becomes creation, ideas become projects, and people
+              build the future together.
             </p>
+
+            {/* Animated Accent Blocks */}
+            <div className="mt-8 flex items-center gap-1.5">
+              {[40, 24, 14, 8].map((width, index) => (
+                <motion.span
+                  key={index}
+                  initial={{ width: 0 }}
+                  whileInView={{ width }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.45,
+                    delay: index * 0.12,
+                    ease: "easeOut",
+                  }}
+                  className="block h-[4px] bg-[#F0440A]"
+                />
+              ))}
+            </div>
 
             <p className="mt-5 text-[10px] font-bold uppercase tracking-[0.2em] text-black/40">
-              Think · Learn · Build · Connect
+              Think Beyond The Possibility
             </p>
-          </div>
+          </motion.div>
 
-          {/* Navigation */}
-          <div className="lg:col-span-3">
-            <h3 className="mb-5 text-[10px] font-bold uppercase tracking-[0.2em] text-black/40">
+          {/* Navigation Block */}
+          <motion.div
+            variants={reveal}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ delay: 0.1 }}
+            className="lg:col-span-3 lg:pl-8"
+          >
+            <h3 className="mb-7 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-black/45">
+              <span className="h-1.5 w-1.5 bg-[#F0440A]" />
               Explore
             </h3>
 
-            <nav className="flex flex-col items-start gap-4">
+            <nav
+              aria-label="Footer navigation"
+              className="flex flex-col items-start"
+            >
               {navigation.map((item, index) => (
                 <a
                   key={item.label}
                   href={item.href}
-                  className="group flex items-center gap-3 text-sm transition-colors hover:text-[#F0440A]"
+                  className="group flex w-full max-w-[240px] items-center justify-between border-b border-black/10 py-3.5 text-sm transition-colors duration-200 hover:border-[#F0440A] hover:text-[#F0440A]"
                 >
-                  <span className="font-mono text-[10px] text-black/30">
-                    0{index + 1}
+                  <span className="flex items-center gap-4">
+                    <span className="font-mono text-[10px] text-black/30">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    {item.label}
                   </span>
-                  {item.label}
-                  <span className="opacity-0 transition-opacity group-hover:opacity-100">
+
+                  <span className="translate-x-[-4px] opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100">
                     ↗
                   </span>
                 </a>
               ))}
             </nav>
-          </div>
+          </motion.div>
 
-          {/* Social links */}
-          <div className="lg:col-span-4">
-            <h3 className="mb-5 text-[10px] font-bold uppercase tracking-[0.2em] text-black/40">
-              Connect with us
+          {/* Contact Block */}
+          <motion.div
+            variants={reveal}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ delay: 0.2 }}
+            className="lg:col-span-5"
+          >
+            <h3 className="mb-7 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-black/45">
+              <span className="h-1.5 w-1.5 bg-[#F0440A]" />
+              Get in touch
             </h3>
 
-            <div className="flex flex-wrap gap-2">
+            <p className="max-w-md text-sm leading-7 text-black/60">
+              Have an idea, a project, or an opportunity to collaborate?
+              Let's turn your next big idea into something real.
+            </p>
+
+            <a
+              href="mailto:hello@synarch.in"
+              className="group mt-6 inline-flex items-center gap-4 border-b border-black/20 pb-3 text-base font-semibold transition-colors hover:border-[#F0440A] hover:text-[#F0440A] sm:text-lg"
+            >
+              hello@synarch.in
+              <span className="text-[#F0440A] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">
+                ↗
+              </span>
+            </a>
+
+            {/* Social Links */}
+            <div className="mt-8 flex flex-wrap gap-3">
               {socials.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
-                  target={
-                    social.href.startsWith("http")
-                      ? "_blank"
-                      : undefined
-                  }
-                  rel={
-                    social.href.startsWith("http")
-                      ? "noopener noreferrer"
-                      : undefined
-                  }
-                  className="border border-black/15 px-4 py-3 text-xs transition-colors hover:border-[#F0440A] hover:bg-[#F0440A] hover:text-white"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="border border-black/15 px-3.5 py-2.5 text-[10px] font-semibold uppercase tracking-wider transition-all duration-200 hover:border-[#F0440A] hover:bg-[#F0440A] hover:text-white"
                 >
                   {social.label} ↗
                 </a>
               ))}
             </div>
-
-            <p className="mt-5 max-w-xs text-xs leading-6 text-black/50">
-              Have an idea or a project? Let's build something meaningful.
-            </p>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="flex flex-col justify-between gap-3 border-t border-black/15 py-6 sm:flex-row sm:items-center">
-          <p className="text-[10px] uppercase tracking-wider text-black/45">
-            © {new Date().getFullYear()} SYNARCH. All rights reserved.
-          </p>
-
-          <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-black/45">
-            Built for what's next.
-          </p>
-
-          <a
-            href="#top"
-            className="w-fit text-[10px] font-bold uppercase tracking-wider transition-colors hover:text-[#F0440A]"
-          >
-            Back to top ↑
-          </a>
-        </div>
+        {/* Big Wordmark */}
+        <FooterWordmark/>
       </div>
+
+      {/* Copyright + Back to Top */}
+      <FooterBottom />
     </footer>
   );
 }

@@ -79,33 +79,7 @@ export default function Stats() {
     >
       <div className="mx-auto max-w-7xl">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-14 flex flex-col justify-between gap-6 md:mb-20 md:flex-row md:items-end"
-        >
-          <div>
-            <div className="mb-5 flex items-center gap-3">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#F0440A]" />
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-white/60">
-                SYNARCH in Numbers
-              </p>
-            </div>
-
-            <h2 className="text-5xl font-semibold leading-[0.95] tracking-[-0.06em] sm:text-6xl lg:text-8xl">
-              Small steps.
-              <br />
-              <span className="text-[#F0440A]">Big impact.</span>
-            </h2>
-          </div>
-
-          <p className="max-w-sm text-sm leading-7 text-white/55 sm:text-base">
-            A community driven by curiosity, collaboration, and the ambition
-            to build something meaningful.
-          </p>
-        </motion.div>
-
+       
         {/* Stats grid */}
         <div className="grid grid-cols-1 border-l border-t border-white/15 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat, index) => {
@@ -157,28 +131,6 @@ export default function Stats() {
           })}
         </div>
 
-        {/* Footer */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.6, duration: 0.5 }}
-          className="mt-7 flex items-center justify-between gap-4"
-        >
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/35">
-            Learn · Build · Connect · Grow
-          </p>
-
-          <a
-            href="#join"
-            className="group inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider"
-          >
-            Join the community
-            <ArrowUpRight
-              size={16}
-              className="text-[#F0440A] transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-            />
-          </a>
-        </motion.div>
       </div>
     </section>
   );

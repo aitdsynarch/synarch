@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -9,102 +9,213 @@ const links = [
   { label: "Projects", href: "#projects" },
 ];
 
+function PixelMark() {
+  const pixels = [
+    [0, 0], [1, 0], [2, 0],
+    [0, 1], [2, 1],
+    [0, 2], [1, 2], [2, 2],
+  ];
+
+  return (
+    <span
+      className="relative block h-[22px] w-[22px] shrink-0"
+      aria-hidden="true"
+    >
+      {pixels.map(([x, y], index) => (
+        <span
+          key={index}
+          className="absolute h-[5px] w-[5px] bg-[#F0440A]"
+          style={{
+            left: `${x * 7}px`,
+            top: `${y * 7}px`,
+          }}
+        />
+      ))}
+    </span>
+  );
+}
+
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const closeMenu = () => setMenuOpen(false);
+
   return (
-    <nav className="relative z-50 border-b border-black/15 bg-[#F5F4EC]">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 sm:px-12 lg:px-20">
+    <header
+      id="top"
+      className="relative z-50  text-[#191919]"
+    >
+      <nav
+  aria-label="Main navigation"
+  className="w-full px-5 sm:px-10 lg:px-16"
+>
+        <div className="flex min-h-[76px] items-center justify-between gap-5 sm:min-h-[88px]">
 
-        {/* Logo */}
-        <a
-          href="#home"
-          className="text-2xl font-black tracking-tight text-[#171717]"
-          onClick={() => setMenuOpen(false)}
-        >
-          SYNARCH<span className="text-[#F0440A]">.</span>
-        </a>
+          {/* Brand */}
+          <a
+            href="#home"
+            onClick={closeMenu}
+            aria-label="SYNARCH home"
+            className="group flex shrink-0 items-center gap-3"
+          >
+            <PixelMark />
 
-        {/* Desktop navigation */}
-        <div className="hidden items-center gap-8 md:flex">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-sm font-medium text-black/65 transition-colors hover:text-[#F0440A]"
-            >
-              {link.label}
-            </a>
-          ))}
+            <span className="text-[25px] font-black leading-none tracking-[-0.075em] sm:text-[29px]">
+              SYNARCH<span className="text-[#F0440A]">.</span>
+            </span>
+          </a>
+
+          {/* Desktop links */}
+          <div className="hidden items-center gap-8 lg:flex xl:gap-10">
+            {links.map((link, index) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="group relative py-3 text-[13px] font-medium text-black/60 transition-colors duration-200 hover:text-[#191919]"
+              >
+                {link.label}
+
+                <span className="absolute bottom-1 left-0 h-[2px] w-0 bg-[#F0440A] transition-all duration-300 group-hover:w-full" />
+              </a>
+            ))}
+          </div>
+
+          {/* Desktop actions */}
+          
+<div className="hidden items-center gap-5 lg:flex">
+  <Link
+    to="/"
+    className="text-[11px] font-semibold uppercase tracking-[0.12em] text-black/50 transition-colors hover:text-[#F0440A]"
+  >
+    Explore
+  </Link>
+
+  <Link
+    to="/join"
+    className="group inline-flex items-center gap-4 bg-[#191919] px-5 py-3.5 text-[11px] font-bold uppercase tracking-[0.1em] text-white transition-colors duration-300 hover:bg-[#F0440A]"
+  >
+    Join SYNARCH
+
+    <span className="text-base transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+      ↗
+    </span>
+  </Link>
+</div>
+
+
+          {/* Tablet CTA */}
+          <a
+            href="#join"
+            className="ml-auto hidden items-center gap-3 border border-black/20 px-4 py-3 text-[11px] font-bold uppercase tracking-wider transition-colors hover:border-[#F0440A] hover:bg-[#F0440A] hover:text-white sm:inline-flex lg:hidden"
+          >
+            Join <span className="text-[#F0440A]">↗</span>
+          </a>
+
+          {/* Mobile menu button */}
+          <button
+            type="button"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
+            className="flex h-11 w-11 shrink-0 flex-col items-center justify-center gap-[6px] border border-black/15 transition-colors hover:border-[#F0440A] lg:hidden"
+          >
+            <motion.span
+              animate={
+                menuOpen
+                  ? { rotate: 45, y: 4, width: 20 }
+                  : { rotate: 0, y: 0, width: 20 }
+              }
+              className="block h-[2px] bg-[#191919]"
+            />
+
+            <motion.span
+              animate={
+                menuOpen
+                  ? { rotate: -45, y: -4, width: 20 }
+                  : { rotate: 0, y: 0, width: 20 }
+              }
+              className="block h-[2px] bg-[#191919]"
+            />
+          </button>
         </div>
 
-        {/* Desktop CTA */}
-        <a
-          href="#join"
-          className="hidden border border-black px-5 py-3 text-xs font-semibold uppercase tracking-wider transition-colors hover:border-[#F0440A] hover:bg-[#F0440A] hover:text-white md:inline-flex"
-        >
-          Join SYNARCH ↗
-        </a>
+        {/* Mobile navigation */}
+        <AnimatePresence initial={false}>
+          {menuOpen && (
+            <motion.div
+              id="mobile-navigation"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
+              className="overflow-hidden lg:hidden"
+            >
+              <div className="border-t border-black/10 pb-6 pt-3">
+                <div className="mb-2 flex items-center justify-between py-3">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/40">
+                    Navigation
+                  </span>
 
-        {/* Mobile menu button */}
-        <button
-          type="button"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-          className="flex h-10 w-10 flex-col items-center justify-center gap-[6px] border border-black/20 md:hidden"
-        >
-          <motion.span
-            animate={menuOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
-            className="h-[2px] w-5 bg-black"
-          />
-          <motion.span
-            animate={
-              menuOpen
-                ? { rotate: -45, y: -4 }
-                : { rotate: 0, y: 0 }
-            }
-            className="h-[2px] w-5 bg-black"
-          />
-        </button>
+                  <span className="text-[10px] font-mono text-black/30">
+                    MENU / 04
+                  </span>
+                </div>
+
+                {links.map((link, index) => (
+                  <motion.a
+                    key={link.label}
+                    href={link.href}
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.2, delay: index * 0.04 }}
+                    onClick={closeMenu}
+                    className="group flex items-center justify-between border-b border-black/10 py-4 transition-colors hover:text-[#F0440A]"
+                  >
+                    <span className="flex items-center gap-4">
+                      <span className="font-mono text-[10px] text-black/30">
+                        0{index + 1}
+                      </span>
+
+                      <span className="text-sm font-medium">
+                        {link.label}
+                      </span>
+                    </span>
+
+                    <span className="text-base text-black/30 transition-all group-hover:translate-x-1 group-hover:text-[#F0440A]">
+                      ↗
+                    </span>
+                  </motion.a>
+                ))}
+
+               <Link
+  to="/join"
+  onClick={closeMenu}
+  className="mt-5 flex w-full items-center justify-between bg-[#F0440A] px-5 py-4 text-xs font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#191919]"
+>
+  Join the community
+  <span className="text-lg">↗</span>
+</Link>
+
+                <p className="mt-5 text-[10px] uppercase tracking-[0.16em] text-black/35">
+                  Think · Learn · Build · Connect
+                </p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+
+      {/* Bottom accent */}
+      <div className="h-px bg-black/10">
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+         className="h-full w-full origin-left bg-[#F0440A]/70"
+        />
       </div>
-
-      {/* Mobile dropdown */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="overflow-hidden border-t border-black/10 bg-[#F5F4EC] md:hidden"
-          >
-            <div className="flex flex-col px-6 py-4">
-              {links.map((link, index) => (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  onClick={() => setMenuOpen(false)}
-                  className="border-b border-black/10 py-4 text-sm font-medium transition-colors hover:text-[#F0440A]"
-                >
-                  {link.label}
-                </motion.a>
-              ))}
-
-              <a
-                href="#join"
-                onClick={() => setMenuOpen(false)}
-                className="mt-5 bg-[#F0440A] px-5 py-4 text-center text-sm font-semibold text-white"
-              >
-                Join SYNARCH ↗
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+    </header>
   );
 }

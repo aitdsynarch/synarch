@@ -29,12 +29,10 @@ export default function HeroBackground() {
         setMouse({ x: -1000, y: -1000 });
       }}
     >
-      {/* Soft orange ambient glow */}
-      <div
-        className="absolute right-[10%] top-[15%] h-[400px] w-[400px] rounded-full bg-[#F0440A]/[0.06] blur-[120px]"
-      />
+      {/* Soft Orange Ambient Glow */}
+      <div className="absolute right-[10%] top-[15%] h-[400px] w-[400px] rounded-full bg-[#F0440A]/[0.06] blur-[120px]" />
 
-      {/* Interactive dot field — no grid */}
+      {/* Interactive Dot Field */}
       <div className="absolute inset-0">
         {Array.from({ length: DOTS_X * DOTS_Y }, (_, i) => {
           const col = i % DOTS_X;
@@ -74,27 +72,48 @@ export default function HeroBackground() {
         })}
       </div>
 
-      {/* Architectural guide lines — not a grid */}
-      <motion.div
-        initial={{ scaleY: 0 }}
-        animate={{ scaleY: 1 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
-        className="absolute left-[8%] top-0 h-full w-px origin-top bg-black/[0.07]"
-      />
+      {/* Architectural Frame — All Four Lines Together */}
+      <div className="absolute inset-0">
 
-      <motion.div
-        initial={{ scaleY: 0 }}
-        animate={{ scaleY: 1 }}
-        transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
-        className="absolute right-[8%] top-0 h-full w-px origin-top bg-black/[0.07]"
-      />
+        {/* Top Line */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="absolute left-[8%] right-[8%] top-0 h-px origin-left bg-black/[0.07]"
+        />
 
-      {/* Paper grain */}
+        {/* Bottom Line */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+          className="absolute bottom-0 left-[8%] right-[8%] h-px origin-left bg-black/[0.07]"
+        />
+
+        {/* Left Line */}
+        <motion.div
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: 1 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="absolute bottom-0 left-[3%] top-0 w-px origin-top bg-black/[0.07]"
+        />
+
+        {/* Right Line */}
+        <motion.div
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: 1 }}
+          transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+          className="absolute bottom-0 right-[3%] top-0 w-px origin-top bg-black/[0.07]"
+        />
+      </div>
+
+      {/* Paper Grain */}
       <div
         className="absolute inset-0 opacity-[0.10] mix-blend-multiply"
         style={{
           backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E\")",
+            'url("data:image/svg+xml,%3Csvg viewBox=%27180%20180%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%27.85%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27 opacity=%27.18%27/%3E%3C/svg%3E")',
         }}
       />
     </div>
