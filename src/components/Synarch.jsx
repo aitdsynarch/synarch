@@ -1,12 +1,12 @@
 ﻿import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import S from "./sections/S";
-import Y from "./sections/Y";
-import N from "./sections/N";
-import A from "./sections/A";
-import R from "./sections/R";
-import C from "./sections/C";
-import H from "./sections/H";
+import S from "./Sections/S";
+import Y from "./Sections/Y";
+import N from "./Sections/N";
+import A from "./Sections/A";
+import R from "./Sections/R";
+import C from "./Sections/C";
+import H from "./Sections/H";
 
 const panels = [
   { letter: "S", component: S },
