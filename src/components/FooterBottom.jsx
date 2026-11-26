@@ -76,7 +76,7 @@ export default function FooterBottom() {
           <div className="relative z-10 flex flex-col gap-3">
             <p className="flex items-center gap-3 text-[10px] tracking-[0.08em] text-white/60">
               <span className="h-2 w-2 shrink-0 bg-[#F0440A]" />
-              <span>© {year} SYNARCH. All rights reserved.</span>
+              <span>© {year} INVIANTS. All rights reserved.</span>
             </p>
 
             <p className="flex items-center gap-3 text-[10px] tracking-[0.08em] text-white/40">

@@ -192,7 +192,7 @@ export default function WhatWeDo() {
             to="/join"
             className="group inline-flex w-fit items-center gap-3 text-sm font-bold uppercase tracking-wider"
           >
-            Be part of SYNARCH
+            Be part of INVIANTS
             <span className="flex h-10 w-10 items-center justify-center bg-[#F0440A] text-white transition-transform group-hover:translate-x-1">
               <ArrowUpRight size={18} />
             </span>
