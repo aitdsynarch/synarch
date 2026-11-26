@@ -100,7 +100,7 @@ export default function FooterCTA() {
       to="/join"
       className="group inline-flex items-center gap-5 bg-[#191919] px-5 py-4 text-xs font-semibold text-white transition-colors duration-300 hover:bg-[#F0440A] sm:px-6 sm:py-5 sm:text-sm"
     >
-      Join SYNARCH
+      Join INVIANTS
 
       <span className="inline-block text-lg transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1">
         ↗
