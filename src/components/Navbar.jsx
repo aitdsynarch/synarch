@@ -6,7 +6,7 @@ const links = [
   { label: "About", href: "#about" },
   { label: "What We Do", href: "#what-we-do" },
   { label: "Events", href: "#events" },
-  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#Contact" },
 ];
 
 
@@ -29,6 +29,7 @@ function PixelMark() {
     <span
       className="relative block h-[32px] w-[32px] shrink-0"
       aria-hidden="true"
+      
     >
       {pixels.map(([x, y, color], index) => (
         <span
