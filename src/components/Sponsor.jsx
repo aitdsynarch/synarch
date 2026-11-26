@@ -113,7 +113,7 @@ export default function Sponsor() {
             </h2>
 
             <p className="max-w-md text-xs leading-7 text-gray-400 sm:text-sm sm:leading-8">
-              SYNARCH is not just a technology club. It's a growing
+              INVIANTS is not just a technology club. It's a growing
               ecosystem of curious minds, creative thinkers and future
               professionals. Your support helps us create opportunities
               beyond the classroom.
