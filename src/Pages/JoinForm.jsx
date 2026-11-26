@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import {
   ArrowUpRight,
@@ -6,8 +5,8 @@ import {
   AlertCircle,
 } from "lucide-react";
 
-const SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbxfEFPObX56cqgiylK_lRhvL-HW51H2PVhNxU3l6pHrRAN-9oVz5u4kD-BEZqXHIYw2pg/exec";
+const GOOGLE_FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSeqdEgCcYjQnaktMHSlaj84CDpr2S19KZDW52imKDKf15DVvA/formResponse";
 
 const teams = [
   "Tech Team",
@@ -19,6 +18,7 @@ const teams = [
 
 const initialForm = {
   name: "",
+  email: "",
   rollNo: "",
   branch: "",
   year: "",
@@ -26,7 +26,18 @@ const initialForm = {
   linkedin: "",
   github: "",
   leetcode: "",
-  reason: "",
+};
+
+const GOOGLE_FORM_FIELDS = {
+  name: "entry.148221579",
+  email: "entry.715089947",
+  rollNo: "entry.1820625118",
+  branch: "entry.33183819",
+  year: "entry.2048603122",
+  team: "entry.852441169",
+  linkedin: "entry.822940572",
+  github: "entry.1273367561",
+  leetcode: "entry.999204375",
 };
 
 export default function JoinForm() {
@@ -60,35 +71,34 @@ export default function JoinForm() {
       const hiddenForm = document.createElement("form");
 
       hiddenForm.method = "POST";
-      hiddenForm.action = SCRIPT_URL;
+      hiddenForm.action = GOOGLE_FORM_URL;
       hiddenForm.target = "synarch-submit-frame";
       hiddenForm.acceptCharset = "UTF-8";
       hiddenForm.style.display = "none";
 
-      const payload = document.createElement("input");
+      Object.entries(GOOGLE_FORM_FIELDS).forEach(
+        ([field, entryId]) => {
+          const input = document.createElement("input");
 
-      payload.type = "hidden";
-      payload.name = "payload";
-      payload.value = JSON.stringify(form);
+          input.type = "hidden";
+          input.name = entryId;
+          input.value = form[field];
 
-      hiddenForm.appendChild(payload);
+          hiddenForm.appendChild(input);
+        }
+      );
+
       document.body.appendChild(hiddenForm);
       hiddenForm.submit();
       hiddenForm.remove();
 
-      // The iframe cannot reliably confirm Apps Script success.
-      // Keep the UI honest instead of showing a false success.
-      setStatus("idle");
-      setError(
-        "Request sent. Please verify the submission in Google Forms Responses before submitting again."
-      );
+      // Google Forms response cannot be verified cross-origin.
+      setStatus("sent");
     } catch (err) {
       console.error("SYNARCH submission error:", err);
 
       setStatus("idle");
-      setError(
-        "Unable to send your application. Please try again."
-      );
+      setError("Unable to submit application. Please try again.");
     }
   };
 
@@ -100,6 +110,8 @@ export default function JoinForm() {
 
   return (
     <section className="min-h-screen bg-[#f0eee3] px-6 py-16 text-[#242424] sm:px-12">
+
+      {/* Hidden Google Forms iframe */}
       <iframe
         name="synarch-submit-frame"
         title="SYNARCH application submission"
@@ -109,9 +121,11 @@ export default function JoinForm() {
       />
 
       <div className="mx-auto max-w-5xl">
+
+        {/* HEADER */}
         <p className="mb-5 text-xs font-bold uppercase tracking-[0.25em] text-[#77746b]">
           <span className="mr-3 inline-block h-2 w-2 bg-[#f04413]" />
-          SYNARCH / MEMBERSHIP
+          INVIANTS / MEMBERSHIP
         </p>
 
         <h1 className="text-5xl font-bold tracking-[-0.06em] sm:text-7xl">
@@ -124,6 +138,7 @@ export default function JoinForm() {
           solvers shaping a better tomorrow through technology.
         </p>
 
+        {/* SECTION TITLE */}
         <div className="my-10 border-y border-[#d1cec3] py-4">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#77746b]">
             <span className="mr-3 inline-block h-2 w-2 bg-[#f04413]" />
@@ -131,6 +146,7 @@ export default function JoinForm() {
           </p>
         </div>
 
+        {/* SUCCESS SCREEN */}
         {status === "sent" ? (
           <div
             role="status"
@@ -146,8 +162,9 @@ export default function JoinForm() {
             </h2>
 
             <p className="mt-4 text-sm leading-7 text-[#77746b]">
-              Check the Google Forms Responses tab to confirm
-              that your application has been saved.
+              Your submission request has been sent. Please check
+              Google Forms Responses to confirm that your application
+              has been saved.
             </p>
 
             <button
@@ -159,12 +176,17 @@ export default function JoinForm() {
             </button>
           </div>
         ) : (
+
+          /* APPLICATION FORM */
           <form
             onSubmit={handleSubmit}
             className="space-y-6"
             acceptCharset="UTF-8"
           >
+
             <div className="grid gap-6 sm:grid-cols-2">
+
+              {/* FULL NAME */}
               <div>
                 <label
                   htmlFor="name"
@@ -185,6 +207,29 @@ export default function JoinForm() {
                 />
               </div>
 
+              {/* EMAIL */}
+              <div>
+                <label
+                  htmlFor="email"
+                  className="mb-2 block text-xs font-semibold"
+                >
+                  Email Address *
+                </label>
+
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="your@email.com"
+                  className={inputClass}
+                  autoComplete="email"
+                  required
+                />
+              </div>
+
+              {/* ROLL NUMBER */}
               <div>
                 <label
                   htmlFor="rollNo"
@@ -204,6 +249,7 @@ export default function JoinForm() {
                 />
               </div>
 
+              {/* BRANCH */}
               <div>
                 <label
                   htmlFor="branch"
@@ -223,6 +269,7 @@ export default function JoinForm() {
                 />
               </div>
 
+              {/* ACADEMIC YEAR */}
               <div>
                 <label
                   htmlFor="year"
@@ -240,14 +287,15 @@ export default function JoinForm() {
                   required
                 >
                   <option value="">Select year</option>
-                  <option value="1">1st Year</option>
-                  <option value="2">2nd Year</option>
-                  <option value="3">3rd Year</option>
-                  <option value="4">4th Year</option>
+                  <option value="1st Year">1st Year</option>
+                  <option value="2nd Year">2nd Year</option>
+                  <option value="3rd Year">3rd Year</option>
+                  <option value="4th Year">4th Year</option>
                 </select>
               </div>
 
-              <div className="sm:col-span-2">
+              {/* PREFERRED TEAM */}
+              <div>
                 <label
                   htmlFor="team"
                   className="mb-2 block text-xs font-semibold"
@@ -273,6 +321,7 @@ export default function JoinForm() {
                 </select>
               </div>
 
+              {/* LINKEDIN */}
               <div>
                 <label
                   htmlFor="linkedin"
@@ -292,6 +341,7 @@ export default function JoinForm() {
                 />
               </div>
 
+              {/* GITHUB */}
               <div>
                 <label
                   htmlFor="github"
@@ -311,6 +361,7 @@ export default function JoinForm() {
                 />
               </div>
 
+              {/* LEETCODE */}
               <div className="sm:col-span-2">
                 <label
                   htmlFor="leetcode"
@@ -330,34 +381,23 @@ export default function JoinForm() {
                 />
               </div>
 
-              <div className="sm:col-span-2">
-                <label
-                  htmlFor="reason"
-                  className="mb-2 block text-xs font-semibold"
-                >
-                  Why do you want to join SYNARCH? *
-                </label>
-
-                <textarea
-                  id="reason"
-                  name="reason"
-                  value={form.reason}
-                  onChange={handleChange}
-                  placeholder="Tell us about your interests and what you want to contribute..."
-                  rows={5}
-                  className={`${inputClass} resize-y`}
-                  required
-                />
-              </div>
             </div>
 
+            {/* ERROR MESSAGE */}
             {error && (
-              <p role="alert" className="text-sm text-red-600">
-                <AlertCircle className="mr-2 inline" size={16} />
+              <p
+                role="alert"
+                className="text-sm text-red-600"
+              >
+                <AlertCircle
+                  className="mr-2 inline"
+                  size={16}
+                />
                 {error}
               </p>
             )}
 
+            {/* SUBMIT BUTTON */}
             <button
               type="submit"
               disabled={status === "submitting"}
@@ -369,18 +409,21 @@ export default function JoinForm() {
 
               <ArrowUpRight size={20} />
             </button>
+
           </form>
         )}
 
+        {/* FOOTER */}
         <footer className="mt-14 flex flex-col gap-3 border-t border-[#d1cec3] pt-5 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-lg font-bold tracking-tight">
-            synarch<span className="text-[#f04413]">.</span>
+            INVIANTS<span className="text-[#f04413]">.</span>
           </p>
 
           <p className="text-[10px] uppercase tracking-[0.2em] text-[#77746b]">
             Think · Learn · Build · Connect
           </p>
         </footer>
+
       </div>
     </section>
   );

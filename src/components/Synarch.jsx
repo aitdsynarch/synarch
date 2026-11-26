@@ -32,7 +32,7 @@ export default function Synarch() {
         {/* Header */}
         <div className="mb-6 flex items-center justify-between gap-3">
           <span className="text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em]">
-            Explore SYNARCH
+            Explore INVIANTS
           </span>
 
           <span className="text-[10px] text-black/50 sm:text-xs">

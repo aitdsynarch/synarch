@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import FooterCTA from "./FooterCTA";
 import FooterBottom from "./FooterBottom";
 import FooterWordmark from "./FooterWordmark";
+import AntAnimation from "./AntAnimation";
 
 const navigation = [
   { label: "About", href: "#about" },
@@ -49,7 +50,7 @@ export default function Footer() {
         <div className="flex items-center justify-between gap-4 border-y border-black/15 py-4">
           <span className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-black/50">
             <span className="h-2 w-2 bg-[#F0440A]" />
-            The SYNARCH Community
+            The INVIANTS Community
           </span>
 
           
@@ -58,66 +59,54 @@ export default function Footer() {
         {/* Content Grid */}
         <div className="grid gap-12 py-14 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8 lg:py-20">
 
-          {/* Brand Block */}
-          <motion.div
-            variants={reveal}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            className="lg:col-span-4"
-          >
-            <a
-              href="#top"
-              aria-label="SYNARCH home"
-              className="group inline-flex items-center gap-3"
-            >
-              {/* Geometric Pixel Mark */}
-              <span className="grid grid-cols-3 gap-[3px]">
-                {Array.from({ length: 9 }, (_, i) => (
-                  <span
-                    key={i}
-                    className={`h-[7px] w-[7px] transition-colors duration-300 ${
-                      [0, 1, 2, 3, 5, 6, 7, 8].includes(i)
-                        ? "bg-[#F0440A] group-hover:bg-[#191919]"
-                        : "bg-transparent"
-                    }`}
-                  />
-                ))}
-              </span>
+        {/* Brand Block */}
+<motion.div
+  variants={reveal}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.2 }}
+  className="lg:col-span-4"
+>
+  <a
+    href="#top"
+    aria-label="SYNARCH home"
+    className="inline-flex items-center"
+  >
+    <img
+      src="/inviant.svg"
+      alt="SYNARCH"
+      className="h-14 w-auto object-contain"
+    />
+  </a>
 
-              <span className="text-3xl font-black tracking-[-0.08em] sm:text-4xl">
-                synarch<span className="text-[#F0440A]">.</span>
-              </span>
-            </a>
+  <p className="mt-6 max-w-sm text-sm leading-7 text-black/60">
+    A student-driven technology community where curiosity
+    becomes creation, ideas become projects, and people
+    build the future together.
+  </p>
 
-            <p className="mt-6 max-w-sm text-sm leading-7 text-black/60">
-              A student-driven technology community where curiosity
-              becomes creation, ideas become projects, and people
-              build the future together.
-            </p>
+  {/* Animated Accent Blocks */}
+  <div className="mt-8 flex items-center gap-1.5">
+    {[40, 24, 14, 8].map((width, index) => (
+      <motion.span
+        key={index}
+        initial={{ width: 0 }}
+        whileInView={{ width }}
+        viewport={{ once: true }}
+        transition={{
+          duration: 0.45,
+          delay: index * 0.12,
+          ease: "easeOut",
+        }}
+        className="block h-[4px] bg-[#F0440A]"
+      />
+    ))}
+  </div>
 
-            {/* Animated Accent Blocks */}
-            <div className="mt-8 flex items-center gap-1.5">
-              {[40, 24, 14, 8].map((width, index) => (
-                <motion.span
-                  key={index}
-                  initial={{ width: 0 }}
-                  whileInView={{ width }}
-                  viewport={{ once: true }}
-                  transition={{
-                    duration: 0.45,
-                    delay: index * 0.12,
-                    ease: "easeOut",
-                  }}
-                  className="block h-[4px] bg-[#F0440A]"
-                />
-              ))}
-            </div>
-
-            <p className="mt-5 text-[10px] font-bold uppercase tracking-[0.2em] text-black/40">
-              Think Beyond The Possibility
-            </p>
-          </motion.div>
+  <p className="mt-5 text-[10px] font-bold uppercase tracking-[0.2em] text-black/40">
+    Think Beyond The Possibility
+  </p>
+</motion.div>
 
           {/* Navigation Block */}
           <motion.div
@@ -178,10 +167,10 @@ export default function Footer() {
             </p>
 
             <a
-              href="mailto:hello@synarch.in"
+              href="mailto:inviants@gmail.com"
               className="group mt-6 inline-flex items-center gap-4 border-b border-black/20 pb-3 text-base font-semibold transition-colors hover:border-[#F0440A] hover:text-[#F0440A] sm:text-lg"
             >
-              hello@synarch.in
+             inviants@gmail.com
               <span className="text-[#F0440A] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">
                 ↗
               </span>
@@ -205,7 +194,10 @@ export default function Footer() {
         </div>
 
         {/* Big Wordmark */}
+        <AntAnimation/>
         <FooterWordmark/>
+        
+        
       </div>
 
       {/* Copyright + Back to Top */}

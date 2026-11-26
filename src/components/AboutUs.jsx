@@ -40,7 +40,7 @@ export default function AboutUs() {
         <span className="h-3 w-3 bg-gradient-to-br from-[#F0EEE3] to-[#F0440A]" />
 
         <span className="shrink-0 text-[10px] font-semibold uppercase tracking-[0.25em] text-white/55 sm:text-xs">
-          About SYNARCH
+          About INVIANTS
         </span>
 
         <div className="ml-2 h-px flex-1 bg-white/20" />
@@ -137,7 +137,7 @@ export default function AboutUs() {
           transition={{ duration: 0.6, delay: 0.15 }}
           className="mx-auto mt-7 max-w-2xl text-sm leading-7 text-white/60 sm:text-base sm:leading-8"
         >
-          SYNARCH is a student-driven technology club that helps college
+          INVIANTS is a student-driven technology club that helps college
   students build in-demand skills and prepare for technical
   interviews, internships, and placements. Through our industry
   connections, professional network, and community, we help students
@@ -156,7 +156,7 @@ export default function AboutUs() {
             className="group mt-8 inline-flex items-stretch bg-[#F0EEE3] text-[#191919] transition-colors duration-300 hover:bg-[#F0440A] hover:text-white"
           >
             <span className="flex items-center px-7 py-4 text-[11px] font-bold uppercase tracking-[0.22em] sm:px-9">
-              Join SYNARCH
+              Join INVIANTS
             </span>
 
             <span className="flex w-14 items-center justify-center bg-[#F0440A] text-white transition-colors duration-300 group-hover:bg-[#F0EEE3] group-hover:text-[#191919]">

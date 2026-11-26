@@ -6,7 +6,7 @@ const links = [
   { label: "About", href: "#about" },
   { label: "What We Do", href: "#what-we-do" },
   { label: "Events", href: "#events" },
-  { label: "Contact", href: "#Contact" },
+  { label: "Contact", href: "contact" },
 ];
 
 
@@ -49,16 +49,6 @@ function PixelMark() {
   );
 }
 
-
-
-
-
-
-
-
-
-
-
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -76,18 +66,21 @@ export default function Navbar() {
         <div className="flex min-h-[76px] items-center justify-between gap-5 sm:min-h-[88px]">
 
           {/* Brand */}
-          <a
-            href="#home"
-            onClick={closeMenu}
-            aria-label="SYNARCH home"
-            className="group flex shrink-0 items-center gap-3"
-          >
-            <PixelMark />
+         {/* Brand */}
+<a
+  href="#home"
+  onClick={closeMenu}
+  aria-label="Inviants home"
+  className="group flex shrink-0 items-center gap-3"
+>
+  <img
+    src="/inviants.svg"
+    alt="Inviants Logo"
+    className="h-14 w-50 shrink-0 object-contain"
+  />
 
-            <span className="text-[25px] font-black leading-none tracking-[-0.075em] sm:text-[29px]">
-              SYNARCH<span className="text-[#F0440A]">.</span>
-            </span>
-          </a>
+  
+</a>
 
           {/* Desktop links */}
           <div className="hidden items-center gap-8 lg:flex xl:gap-10">
@@ -118,7 +111,7 @@ export default function Navbar() {
     to="/join"
     className="group inline-flex items-center gap-4 bg-[#191919] px-5 py-3.5 text-[11px] font-bold uppercase tracking-[0.1em] text-white transition-colors duration-300 hover:bg-[#F0440A]"
   >
-    Join SYNARCH
+    Join inviants
 
     <span className="text-base transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
       ↗

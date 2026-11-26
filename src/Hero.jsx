@@ -110,30 +110,34 @@ export default function Hero() {
         </motion.div>
 
         {/* Right Artwork */}
-        <motion.div
-          initial={{ opacity: 0, x: 25, scale: 0.96 }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{
-            duration: 1,
-            delay: 0.15,
-            ease: "easeOut",
-          }}
-          className="relative mx-auto w-full max-w-[760px] lg:ml-8 lg:-mr-16 xl:ml-12 xl:-mr-20"
-        >
-          <div className="pointer-events-none absolute inset-10 rounded-full bg-[#F0440A]/[0.05] blur-3xl" />
+       
+<motion.div
+  initial={{ opacity: 0, x: 25, scale: 0.96 }}
+  animate={{ opacity: 1, x: 0, scale: 1 }}
+  transition={{
+    duration: 1,
+    delay: 0.15,
+    ease: "easeOut",
+  }}
+  className="relative mx-auto w-full lg:-ml-12 xl:-ml-16"
+>
+  {/* Background Glow */}
+  <div className="pointer-events-none absolute inset-10 rounded-full bg-[#F0440A]/[0.05] blur-3xl" />
 
-          <img
-            src="/images/hero.png"
-            alt="SYNARCH architectural artwork"
-            fetchPriority="high"
-            className="relative block h-auto w-full object-contain"
-          />
+  {/* Hero Image */}
+  <img
+    src="/images/hero-4.png"
+    alt="SYNARCH architectural artwork"
+    fetchPriority="high"
+    className="relative block h-auto w-[125%] max-w-none object-contain"
+  />
 
-          <div className="absolute bottom-3 right-2 flex items-center gap-2 text-[9px] uppercase tracking-[0.18em] text-black/45 sm:right-0">
-            <span className="h-px w-6 bg-[#F0440A]" />
-            SYNARCH / 001
-          </div>
-        </motion.div>
+  {/* Image Label */}
+  <div className="absolute bottom-3 right-2 flex items-center gap-2 text-[9px] uppercase tracking-[0.18em] text-black/45">
+    <span className="h-px w-6 bg-[#F0440A]" />
+    SYNARCH / 001
+  </div>
+</motion.div>
       </div>
 
       {/* Bottom Information */}

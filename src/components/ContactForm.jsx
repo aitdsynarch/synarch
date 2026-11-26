@@ -1,5 +1,7 @@
-
 import React, { useState } from "react";
+
+const GOOGLE_FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSdpuiw3vj5xhN5Ax-mdqz3FzK8R22QJuOdRRKIUEB75bWSNkg/formResponse";
 
 export default function ContactForm() {
   const [form, setForm] = useState({
@@ -9,28 +11,46 @@ export default function ContactForm() {
     message: "",
   });
 
+  const [status, setStatus] = useState("idle");
+
   const handleChange = (e) => {
-    setForm({
-      ...form,
+    setForm((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
-    });
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const body = `
-Name: ${form.name}
-Email: ${form.email}
-Subject: ${form.subject}
+    setStatus("loading");
 
-Message:
-${form.message}
-    `;
+    const formData = new FormData();
 
-    window.location.href = `mailto:synarch.club@gmail.com?subject=${encodeURIComponent(
-      form.subject
-    )}&body=${encodeURIComponent(body)}`;
+    formData.append("entry.1586529885", form.name);
+    formData.append("entry.1043178558", form.email);
+    formData.append("entry.80672962", form.subject);
+    formData.append("entry.369906501", form.message);
+
+    try {
+      await fetch(GOOGLE_FORM_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData,
+      });
+
+      setStatus("success");
+
+      setForm({
+        name: "",
+        email: "",
+        subject: "General Inquiry",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Submission error:", error);
+      setStatus("error");
+    }
   };
 
   return (
@@ -43,7 +63,7 @@ ${form.message}
             02 / SEND A MESSAGE
           </span>
 
-          <h3 className="mt-4 text-2xl font-bold">
+          <h3 className="mt-4 text-2xl font-bold text-white">
             We'd love to hear from you.
           </h3>
         </div>
@@ -52,6 +72,20 @@ ${form.message}
           ↗
         </span>
       </div>
+
+      {/* SUCCESS MESSAGE */}
+      {status === "success" && (
+        <div className="mb-6 border border-green-500/30 bg-green-500/10 p-4 text-sm text-green-400">
+          Thank you! Your message has been submitted successfully.
+        </div>
+      )}
+
+      {/* ERROR MESSAGE */}
+      {status === "error" && (
+        <div className="mb-6 border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-400">
+          Something went wrong. Please try again.
+        </div>
+      )}
 
       {/* FORM */}
       <form onSubmit={handleSubmit} className="space-y-7">
@@ -100,10 +134,11 @@ ${form.message}
             name="subject"
             value={form.subject}
             onChange={handleChange}
+            required
             className="w-full border-b border-white/20 bg-[#151616] py-4 text-sm text-gray-300 outline-none focus:border-[#F0440A]"
           >
             <option>General Inquiry</option>
-            <option>Join SYNARCH</option>
+            <option>Join INVIANTS</option>
             <option>Sponsorship</option>
             <option>Collaboration</option>
             <option>Event Partnership</option>
@@ -131,14 +166,15 @@ ${form.message}
         {/* SUBMIT */}
         <button
           type="submit"
-          className="group flex w-full items-center justify-between bg-[#F1EFE5] px-6 py-5 text-[#101111] transition hover:bg-[#F0440A] hover:text-white"
+          disabled={status === "loading"}
+          className="group flex w-full items-center justify-between bg-[#F1EFE5] px-6 py-5 text-[#101111] transition hover:bg-[#F0440A] hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
         >
           <span className="text-[10px] font-extrabold tracking-[2px]">
-            SEND MESSAGE
+            {status === "loading" ? "SENDING..." : "SEND MESSAGE"}
           </span>
 
           <span className="text-xl transition group-hover:translate-x-1">
-            ↗
+            {status === "loading" ? "..." : "↗"}
           </span>
         </button>
 

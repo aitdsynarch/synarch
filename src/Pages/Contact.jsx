@@ -1,11 +1,12 @@
 import ContactForm from "../components/ContactForm";
 import React, { useState } from "react";
+import Footer from "../components/Footer";
 
 const contactDetails = [
   {
     label: "EMAIL",
-    value: "synarch.club@gmail.com",
-    href: "mailto:synarch.club@gmail.com",
+    value: "inviants@gmail.com",
+    href: "mailto:inviants@gmail.com",
   },
   {
     label: "LOCATION",
@@ -147,36 +148,10 @@ ${form.message}
         </div>
       </section>
 
-      {/* BOTTOM CTA */}
-      <section className="border-t border-white/10 px-6 py-24 text-center">
-        <h2 className="text-3xl font-bold tracking-tight md:text-5xl">
-          Let's make something
-          <span className="text-[#F0440A]"> happen.</span>
-        </h2>
-
-        <p className="mt-5 text-xs tracking-widest text-gray-500">
-          PEOPLE. IDEAS. TECHNOLOGY. IMPACT.
-        </p>
-      </section>
+      
 
       {/* FOOTER */}
-      <footer className="flex flex-col justify-between gap-5 border-t border-white/15 px-6 py-9 md:flex-row md:items-center md:px-12 lg:px-24">
-
-        <a href="/" className="flex items-center gap-3">
-          <span className="h-3 w-3 bg-[#F0440A]" />
-          <span className="text-xs font-bold tracking-[3px]">
-            SYNARCH
-          </span>
-        </a>
-
-        <span className="text-[8px] tracking-[2px] text-gray-500">
-          PEOPLE. IDEAS. TECHNOLOGY. IMPACT.
-        </span>
-
-        <span className="text-[8px] tracking-[1.5px] text-gray-500">
-          © 2026 SYNARCH. ALL RIGHTS RESERVED.
-        </span>
-      </footer>
+      <Footer/>
 
     </main>
   );

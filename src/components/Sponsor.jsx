@@ -104,7 +104,7 @@ export default function Sponsor() {
 
           <div className="mt-8 flex flex-col justify-between gap-6 sm:mt-12 sm:gap-8 lg:flex-row lg:items-end">
 
-            <h2 className="text-4xl font-medium leading-[1.12] tracking-[-1.8px] sm:text-5xl sm:tracking-[-2px] md:text-6xl md:tracking-[-3px]">
+            <h2 className="text-4xl font-bold leading-[1.12] tracking-[-1.8px] sm:text-5xl sm:tracking-[-2px] md:text-6xl md:tracking-[-3px]">
               More than visibility.
               <br />
               <span className="text-[#F0440A]">
@@ -140,7 +140,7 @@ export default function Sponsor() {
 
           <div className="mt-8 flex flex-col justify-between gap-6 sm:mt-12 sm:gap-8 lg:flex-row lg:items-end">
 
-            <h2 className="text-4xl font-medium leading-[1.12] tracking-[-1.8px] sm:text-5xl sm:tracking-[-2px] md:text-6xl md:tracking-[-3px]">
+            <h2 className="text-4xl font-bold leading-[1.12] tracking-[-1.8px] sm:text-5xl sm:tracking-[-2px] md:text-6xl md:tracking-[-3px]">
               Choose your
               <br />
               <span className="text-[#F0440A]">impact.</span>
